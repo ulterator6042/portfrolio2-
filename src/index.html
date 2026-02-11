@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="navbar glass">
+    <button class="nav-btn" data-section="home">Home</button>
+    <button class="nav-btn" data-section="about">About Me</button>
+    <button class="nav-btn" data-section="play">Play</button>
+  </div>
+  <div class="mode-toggle-bar">
+    <button class="mode-toggle">🌞/🌙</button>
+  </div>
+  <div class="container">
+    <section id="home" class="page active">
+      <h1>Welcome to My Portfolio</h1>
+      <p>Placeholder text for introduction.</p>
+      <button class="download-btn">Download Portfolio</button>
+    </section>
+    <section id="about" class="page">
+      <div class="about-grid about-g2">
+        <div class="about-col about-col-left">
+          <div class="glass about-card">
+            <h2 style="margin-bottom:8px;">Matteo Isabella</h2>
+            <p><b>Product designer</b></p>
+            <p><b>Phone:</b> +39 3917229267<br>
+            <b>Email:</b> <a href="mailto:matteo.isabella@gmail.com" id="email-link">matteo.isabella@gmail.com</a>
+            <button class="copy-btn" title="Copy email" onclick="navigator.clipboard.writeText('matteo.isabella@gmail.com')">📋</button></p>
+          </div>
+          <div class="glass about-card">
+            <h2>Bio</h2>
+            <div class="about-section">
+              Hi, I’m a young product designer from Milan, Italy.<br>
+              I enjoy immersing myself in a wide range of creative projects, spanning from sewing to 3D printing, from caring for plants to artistic 3D modeling, always trying to take something from each passion and bring it into my design process.
+            </div>
+          </div>
+          <div class="glass about-card">
+            <h2>Languages</h2>
+            <div class="about-section">
+              <b>Italian:</b> Native language<br>
+              <b>English:</b> Fluent - C2
+            </div>
+          </div>
+        </div>
+        <div class="about-col about-col-right">
+          <div class="glass about-card">
+            <h2>Experience</h2>
+            <div class="about-section">
+              <b>2025-ongoing</b><br>
+              <b>Philips, Amsterdam</b><br>
+              Product Designer intern for the shaving & grooming team.<br>
+              Worked on product development and design for grooming innovations, supporting user research, prototyping, and cross-functional collaboration.
+            </div>
+            <div class="about-section">
+              <b>2023-2024</b><br>
+              <b>5VIE network, Milano Design Week</b><br>
+              Graphic Designer, exhibition installer, gallery guide, event organizer for Design Week 5VIE district.
+            </div>
+          </div>
+          <div class="glass about-card">
+            <h2>Education</h2>
+            <div class="about-section">
+              <b>2024-ongoing</b><br>
+              <b>TU Delft</b><br>
+              Master's degree in Interaction Design
+            </div>
+            <div class="about-section">
+              <b>2021-2024</b><br>
+              <b>Politecnico di Milano</b><br>
+              Bachelor's degree in Product Design
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="play" class="page">
+      <div class="gallery glass">
+        <div class="gallery-item"><img src="https://via.placeholder.com/150" alt="Hobby 1"><p>Hobby 1</p></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/150" alt="Project 1"><p>Project 1</p></div>
+        <div class="gallery-item"><img src="https://via.placeholder.com/150" alt="Hobby 2"><p>Hobby 2</p></div>
+      </div>
+    </section>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>

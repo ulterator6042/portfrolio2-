@@ -1,0 +1,17 @@
+# Node modules and logs
+node_modules/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# VS Code settings
+.vscode/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment files
+.env
