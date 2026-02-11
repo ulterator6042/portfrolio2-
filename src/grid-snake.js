@@ -12,7 +12,10 @@
   document.head.appendChild(link);
 
   // Config
-  const cellSize = 60;
+  function getCellSize() {
+    return window.innerWidth <= 600 ? 24 : 60;
+  }
+  const cellSize = getCellSize();
   const snakeLength = 8;
   let cols, rows, grid, blocked = [];
   let snake = [], dir = {col: 1, row: 0}, path = null;
@@ -20,9 +23,11 @@
   let moveInterval = 240;
   let foodDot = null;
   let movingTo = null;
+  let mobileFoodInterval = null;
 
   // UI avoidance
   function updateBlocked() {
+    const cellSize = getCellSize();
     const importantSelectors = [
       '.navbar', '.mode-toggle-bar', '.about-card', '.gallery', '.download-btn', '.cv', '.contacts'
     ];
@@ -44,12 +49,14 @@
   }
 
   function createGrid() {
+    const cellSize = getCellSize();
     cols = Math.ceil(window.innerWidth / cellSize);
     rows = Math.ceil(window.innerHeight / cellSize);
     updateBlocked();
   }
 
   function renderSnake() {
+    const cellSize = getCellSize();
     if (bg.firstChild) bg.removeChild(bg.firstChild);
     const gridDiv = document.createElement('div');
     gridDiv.className = 'grid-snake-grid';
@@ -59,6 +66,8 @@
       const idx = seg.row * cols + seg.col;
       const segDiv = document.createElement('div');
       segDiv.className = 'grid-snake-segment';
+      segDiv.style.width = `${cellSize}px`;
+      segDiv.style.height = `${cellSize}px`;
       segDiv.style.gridColumnStart = seg.col + 1;
       segDiv.style.gridRowStart = seg.row + 1;
       gridDiv.appendChild(segDiv);
@@ -68,6 +77,8 @@
       foodDiv.className = 'grid-snake-segment';
       foodDiv.style.background = '#e74c3c';
       foodDiv.style.opacity = 1;
+      foodDiv.style.width = `${cellSize}px`;
+      foodDiv.style.height = `${cellSize}px`;
       foodDiv.style.gridColumnStart = foodDot.col + 1;
       foodDiv.style.gridRowStart = foodDot.row + 1;
       gridDiv.appendChild(foodDiv);
@@ -123,6 +134,10 @@
   }
 
   function moveSnake(ts) {
+    if (foodDot && (!movingTo || (movingTo.col !== foodDot.col || movingTo.row !== foodDot.row))) {
+      movingTo = {col: foodDot.col, row: foodDot.row};
+      path = bfsPath(snake[0], movingTo);
+    }
     if (movingTo && path && path.length > 1) {
       const next = path[1];
       dir = {col: (next.col - snake[0].col + cols) % cols, row: (next.row - snake[0].row + rows) % rows};
@@ -135,8 +150,10 @@
       path.shift();
       if (foodDot && next.col === foodDot.col && next.row === foodDot.row) {
         foodDot = null;
+        movingTo = null;
+        path = null;
       }
-      if (path.length === 1) { movingTo = null; path = null; }
+      if (path && path.length === 1) { movingTo = null; path = null; }
       renderSnake();
       return;
     }
@@ -175,6 +192,29 @@
     path = null;
     movingTo = null;
     renderSnake();
+    if (window.innerWidth <= 600) {
+      if (mobileFoodInterval) clearInterval(mobileFoodInterval);
+      spawnRandomFoodDot();
+      mobileFoodInterval = setInterval(spawnRandomFoodDot, 10000);
+    } else {
+      if (mobileFoodInterval) clearInterval(mobileFoodInterval);
+      mobileFoodInterval = null;
+    }
+  }
+
+  function spawnRandomFoodDot() {
+    if (window.innerWidth > 600) return;
+    let tries = 0;
+    while (tries < 100) {
+      const col = Math.floor(Math.random() * cols);
+      const row = Math.floor(Math.random() * rows);
+      if (!isBlocked(col, row) && !isSnake(col, row)) {
+        foodDot = {col, row};
+        renderSnake();
+        break;
+      }
+      tries++;
+    }
   }
 
   window.addEventListener('resize', () => {
@@ -185,6 +225,8 @@
 
   // Listen for clicks globally
   document.addEventListener('click', function(e) {
+    if (window.innerWidth <= 600) return;
+    const cellSize = getCellSize();
     const x = e.clientX, y = e.clientY;
     const col = Math.floor(x / cellSize);
     const row = Math.floor(y / cellSize);
