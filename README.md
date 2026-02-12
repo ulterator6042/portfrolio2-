@@ -12,4 +12,4 @@ This is a modern portfolio website with three sections:
 - Day/Night mode toggle.
 
 ## How to Use
-Open `src/index.html` in your browser. Replace placeholder text and images with your own content as needed.
+Open `index.html` in your browser. Replace placeholder text and images with your own content as needed.

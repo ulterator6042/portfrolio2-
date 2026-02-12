@@ -11,4 +11,4 @@
 Portfolio website with three static sections (Homepage, About Me, Play), glassmorphism UI, day/night mode, sliding navigation, and placeholder content.
 
 ## Next Steps
-Replace placeholder text and images with your own content. Open `src/index.html` in your browser to view the site.
+Replace placeholder text and images with your own content. Open `index.html` in your browser to view the site.

@@ -1,37 +1,37 @@
 /* Mobile: reduce all pixel trail elements by 70% */
 @media (max-width: 800px) {
-	.pixel-trail-grid {
-		grid-template-columns: repeat(auto-fill, 18px);
-		grid-template-rows: repeat(auto-fill, 18px);
-	}
-	.pixel-trail-pixel {
-		width: 18px;
-		height: 18px;
-	}
+  .pixel-trail-grid {
+    grid-template-columns: repeat(auto-fill, 18px);
+    grid-template-rows: repeat(auto-fill, 18px);
+  }
+  .pixel-trail-pixel {
+    width: 18px;
+    height: 18px;
+  }
 }
 /* Pixel Trail Background Effect Styles */
 #pixel-trail-bg {
-	position: fixed;
-	top: 0; left: 0; width: 100vw; height: 100vh;
-	z-index: 0;
-	pointer-events: none;
-	overflow: hidden;
+  position: fixed;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 .pixel-trail-grid {
-	display: grid;
-	width: 100vw;
-	height: 100vh;
-	grid-template-columns: repeat(auto-fill, 60px);
-	grid-template-rows: repeat(auto-fill, 60px);
-	pointer-events: none;
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: repeat(auto-fill, 60px);
+  grid-template-rows: repeat(auto-fill, 60px);
+  pointer-events: none;
 }
 .pixel-trail-pixel {
-	width: 60px;
-	height: 60px;
-	border-radius: 50%;
-	background: #88a891;
-	opacity: 0;
-	transition: opacity 0.35s;
-	margin: auto;
-	pointer-events: none;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #88a891;
+  opacity: 0;
+  transition: opacity 0.35s;
+  margin: auto;
+  pointer-events: none;
 }
