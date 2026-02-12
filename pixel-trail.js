@@ -13,6 +13,11 @@
     cellSize = Math.round(60 * 0.3); // 70% reduction
     pixelSize = Math.round(60 * 0.3);
   }
+  // Standardize snake color for mobile (pixel-trail.js uses window.isMobile)
+  if (window.isMobile) {
+    cellSize = 22;
+    pixelSize = 22;
+  }
   let food = null;
 
   // Utility: Check if a cell is a barrier
@@ -145,7 +150,7 @@
     }
     while (snake.length > snakeLen) snake.pop();
     // Animate
-    pixels.forEach(px => { if (px) { px.style.opacity = 0; px.style.background = '#88a891'; } });
+    pixels.forEach(px => { if (px) { px.style.opacity = 0; px.style.background = '#ffa04f'; } });
     for (const seg of snake) {
       const idx = seg.row * cols + seg.col;
       if (pixels[idx]) pixels[idx].style.opacity = 1;
@@ -155,7 +160,7 @@
       const idx = food.row * cols + food.col;
       if (pixels[idx]) {
         pixels[idx].style.opacity = 1;
-        pixels[idx].style.background = '#e74c3c';
+        pixels[idx].style.background = '#ffa04f';
       }
     }
   }

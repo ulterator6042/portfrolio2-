@@ -391,3 +391,33 @@ body.night {
     font-size: 1.1em;
   }
 }
+
+/* --- 1. Dark mode: lighter UI elements for more contrast --- */
+body.night .navbar,
+body.night .nav-btn,
+body.night .nav-btn.active,
+body.night .download-btn {
+  background: #232528 !important;
+  /* slightly lighter charcoal for contrast */
+}
+
+/* --- 2. Standardize orange snake color for both mobile and desktop --- */
+:root {
+  --snake-body: #ffa04f;
+  --snake-head: #e68a2a;
+  --nav-active-bg: #ffa04f;
+  --nav-active-text: #222;
+  --nav-active-shadow: 0 0 8px #ffa04f99;
+}
+body.night {
+  --snake-body: #ffa04f;
+  --snake-head: #e68a2a;
+  --nav-active-bg: #ffa04f;
+  --nav-active-text: #f8f8f8;
+  --nav-active-shadow: 0 0 8px #ffa04f99;
+}
+
+/* --- 4. Pill shape for floating menu, nav buttons, and download button --- */
+.navbar, .nav-btn, .nav-btn.active, .download-btn {
+  border-radius: 999px !important;
+}

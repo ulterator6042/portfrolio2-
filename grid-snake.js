@@ -70,11 +70,11 @@
       segDiv.style.height = `${cellSize}px`;
       segDiv.style.gridColumnStart = seg.col + 1;
       segDiv.style.gridRowStart = seg.row + 1;
-      // Head is darker orange
+      // Head is slightly darker orange
       if (i === 0) {
-        segDiv.style.background = 'var(--snake-head, #d76a1a)';
+        segDiv.style.background = 'var(--snake-head, #e68a2a)';
         segDiv.style.opacity = 0.95;
-        segDiv.style.boxShadow = '0 0 18px 0 #d76a1a66';
+        segDiv.style.boxShadow = '0 0 18px 0 #e68a2a66';
       } else {
         segDiv.style.background = 'var(--snake-body, #ffa04f)';
         segDiv.style.opacity = 0.7;
@@ -85,7 +85,7 @@
     if (foodDot) {
       const foodDiv = document.createElement('div');
       foodDiv.className = 'grid-snake-segment';
-      foodDiv.style.background = '#e74c3c';
+      foodDiv.style.background = '#ffa04f';
       foodDiv.style.opacity = 1;
       foodDiv.style.width = `${cellSize}px`;
       foodDiv.style.height = `${cellSize}px`;
