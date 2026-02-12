@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Website</title>
-  <link rel="stylesheet" href="src/style.css">
+  <link rel="stylesheet" href="style.css">
   <script>
     // Device detection: treat width <= 800px as mobile
     window.isMobile = window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent);
@@ -12,12 +12,12 @@
     if (window.isMobile) {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = 'src/pixel-trail.css';
+      link.href = 'pixel-trail.css';
       document.head.appendChild(link);
     } else {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.href = 'src/grid-snake.css';
+      link.href = 'grid-snake.css';
       document.head.appendChild(link);
     }
   </script>
@@ -169,16 +169,16 @@
       </div>
     </section>
   </div>
-  <script src="src/app.js"></script>
+  <script src="app.js"></script>
   <script>
     // Conditionally load background effect JS
     if (window.isMobile) {
       var s = document.createElement('script');
-      s.src = 'src/pixel-trail.js';
+      s.src = 'pixel-trail.js';
       document.body.appendChild(s);
     } else {
       var s = document.createElement('script');
-      s.src = 'src/grid-snake.js';
+      s.src = 'grid-snake.js';
       document.body.appendChild(s);
     }
   </script>
