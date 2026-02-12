@@ -62,14 +62,24 @@
     gridDiv.className = 'grid-snake-grid';
     gridDiv.style.gridTemplateColumns = `repeat(${cols}, ${cellSize}px)`;
     gridDiv.style.gridTemplateRows = `repeat(${rows}, ${cellSize}px)`;
-    for (const seg of snake) {
-      const idx = seg.row * cols + seg.col;
+    for (let i = 0; i < snake.length; i++) {
+      const seg = snake[i];
       const segDiv = document.createElement('div');
       segDiv.className = 'grid-snake-segment';
       segDiv.style.width = `${cellSize}px`;
       segDiv.style.height = `${cellSize}px`;
       segDiv.style.gridColumnStart = seg.col + 1;
       segDiv.style.gridRowStart = seg.row + 1;
+      // Head is darker orange
+      if (i === 0) {
+        segDiv.style.background = 'var(--snake-head, #d76a1a)';
+        segDiv.style.opacity = 0.95;
+        segDiv.style.boxShadow = '0 0 18px 0 #d76a1a66';
+      } else {
+        segDiv.style.background = 'var(--snake-body, #ffa04f)';
+        segDiv.style.opacity = 0.7;
+        segDiv.style.boxShadow = '0 0 16px 0 #ffa04f44';
+      }
       gridDiv.appendChild(segDiv);
     }
     if (foodDot) {

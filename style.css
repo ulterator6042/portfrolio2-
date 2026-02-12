@@ -139,15 +139,19 @@ body {
   --nav-active-bg: #0078d7;
   --nav-active-text: #fff;
   --nav-active-shadow: 0 0 8px #0078d7;
+  --snake-body: #ffa04f;
+  --snake-head: #d76a1a;
 }
 
 body.night {
-  --bg: #181a1b;
-  --text: #f0f0f0;
-  --glass-bg: rgba(30,30,30,0.4);
+  --bg: #141517;
+  --text: #f8f8f8;
+  --glass-bg: rgba(30,30,30,0.5);
   --nav-active-bg: #00bfff;
   --nav-active-text: #181a1b;
   --nav-active-shadow: 0 0 8px #00bfff;
+  --snake-body: #ff7f1a;
+  --snake-head: #c44a00;
 }
 
 .glass {
