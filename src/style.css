@@ -1,3 +1,113 @@
+@media (min-width: 801px) {
+  .about-desktop .about-grid.about-g2 {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    max-width: 540px;
+    margin: 32px auto 0 auto;
+    width: 100%;
+    align-items: stretch;
+  }
+  .about-desktop .about-col {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+  }
+  .about-desktop .about-card {
+    padding: 16px 18px;
+    border-radius: 14px;
+    font-size: 1em;
+    margin-bottom: 0;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    min-width: 0;
+  }
+  .about-desktop .about-section {
+    margin-bottom: 8px;
+    font-size: 0.99em;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+  .about-desktop h1, .about-desktop h2, .about-desktop h3 {
+    font-size: 1.08em;
+    margin: 0 0 6px 0;
+  }
+}
+@media (max-width: 800px) {
+  .about-mobile .about-accordion {
+    margin: 12px 4vw 16px 4vw !important;
+    box-sizing: border-box;
+    width: auto;
+    max-width: 92vw;
+  }
+}
+/* Show/hide About layouts for mobile/desktop */
+.about-mobile { display: none; }
+.about-desktop { display: block; }
+@media (max-width: 800px) {
+  .about-mobile { display: block; }
+  .about-desktop { display: none; }
+}
+/* Accordion styles for About Me section */
+.about-accordion {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.accordion-item {
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--glass-bg, #fff);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.accordion-toggle {
+  width: 100%;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 1.1em;
+  font-weight: bold;
+  padding: 14px 18px;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text);
+  transition: background 0.2s;
+}
+.accordion-toggle:hover, .accordion-toggle:focus {
+  background: rgba(0,120,215,0.08);
+}
+.accordion-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s cubic-bezier(0.4,0,0.2,1);
+  background: none;
+}
+.accordion-item.active .accordion-panel {
+  max-height: 600px;
+  transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.accordion-panel .about-card {
+  box-shadow: none;
+  margin: 0;
+  border-radius: 0;
+  padding: 12px 18px;
+}
+@media (max-width: 600px) {
+  .about-accordion {
+    max-width: 98vw;
+    gap: 6px;
+  }
+  .accordion-toggle {
+    font-size: 1em;
+    padding: 10px 10px;
+  }
+  .accordion-panel .about-card {
+    padding: 8px 8px;
+    font-size: 0.97em;
+  }
+}
 body {
   margin: 0;
   padding: 0;
