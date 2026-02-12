@@ -6,7 +6,13 @@
   document.body.appendChild(bg);
 
   let cols, rows, grid, pixels = [], barriers = [];
-  const cellSize = 60;
+  // Reduce grid unit size by 70% for mobile
+  let cellSize = 60;
+  let pixelSize = 60;
+  if (window.isMobile) {
+    cellSize = Math.round(60 * 0.3); // 70% reduction
+    pixelSize = Math.round(60 * 0.3);
+  }
   let food = null;
 
   // Utility: Check if a cell is a barrier
@@ -52,6 +58,11 @@
         px.className = 'pixel-trail-pixel';
         px.dataset.col = c;
         px.dataset.row = r;
+        // Only set pixel size for mobile, let CSS handle desktop
+        if (window.isMobile) {
+          px.style.width = pixelSize + 'px';
+          px.style.height = pixelSize + 'px';
+        }
         grid.appendChild(px);
         pixels.push(px);
       }

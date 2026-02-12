@@ -1,3 +1,14 @@
+/* Mobile: reduce all pixel trail elements by 70% */
+@media (max-width: 800px) {
+  .pixel-trail-grid {
+    grid-template-columns: repeat(auto-fill, 18px);
+    grid-template-rows: repeat(auto-fill, 18px);
+  }
+  .pixel-trail-pixel {
+    width: 18px;
+    height: 18px;
+  }
+}
 /* Pixel Trail Background Effect Styles */
 #pixel-trail-bg {
   position: fixed;

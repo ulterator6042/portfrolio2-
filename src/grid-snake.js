@@ -184,11 +184,21 @@
   function setup() {
     createGrid();
     snake = [];
-    let startCol = Math.floor(cols/4), startRow = Math.floor(rows/2);
+    // Random border entrance
+    const borders = [
+      {col: 0, row: Math.floor(Math.random() * rows), dir: {col: 1, row: 0}}, // left
+      {col: cols-1, row: Math.floor(Math.random() * rows), dir: {col: -1, row: 0}}, // right
+      {col: Math.floor(Math.random() * cols), row: 0, dir: {col: 0, row: 1}}, // top
+      {col: Math.floor(Math.random() * cols), row: rows-1, dir: {col: 0, row: -1}} // bottom
+    ];
+    const entry = borders[Math.floor(Math.random() * borders.length)];
     for (let i = 0; i < snakeLength; i++) {
-      snake.push({col: (startCol-i+cols)%cols, row: startRow});
+      snake.push({
+        col: (entry.col - i * entry.dir.col + cols) % cols,
+        row: (entry.row - i * entry.dir.row + rows) % rows
+      });
     }
-    dir = {col: 1, row: 0};
+    dir = {col: entry.dir.col, row: entry.dir.row};
     path = null;
     movingTo = null;
     renderSnake();

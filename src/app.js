@@ -15,6 +15,21 @@ function showPage(index) {
     btn.classList.toggle('active', i === index);
   });
   currentPage = index;
+
+  // Show/hide snake effect only on home (page 0)
+  if (window.isMobile === false) {
+    // Desktop: grid-snake
+    const snakeBg = document.getElementById('grid-snake-bg');
+    if (snakeBg) {
+      snakeBg.style.display = (index === 0) ? 'block' : 'none';
+    }
+  } else {
+    // Mobile: pixel-trail
+    const pixelTrailBg = document.getElementById('pixel-trail-bg');
+    if (pixelTrailBg) {
+      pixelTrailBg.style.display = (index === 0) ? 'block' : 'none';
+    }
+  }
 }
 
 navBtns.forEach((btn, i) => {
@@ -23,6 +38,7 @@ navBtns.forEach((btn, i) => {
   });
 });
 
+// Initial page and effect visibility
 showPage(currentPage);
 
 modeToggle.addEventListener('click', () => {
