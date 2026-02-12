@@ -6,18 +6,9 @@
   document.body.appendChild(bg);
 
   let cols, rows, grid, pixels = [], barriers = [];
-  // Reduce grid unit size by 70% for mobile
-  let cellSize = 60;
-  let pixelSize = 60;
-  if (window.isMobile) {
-    cellSize = Math.round(60 * 0.3); // 70% reduction
-    pixelSize = Math.round(60 * 0.3);
-  }
-  // Standardize snake color for mobile (pixel-trail.js uses window.isMobile)
-  if (window.isMobile) {
-    cellSize = 22;
-    pixelSize = 22;
-  }
+  // Set grid and pixel size for mobile/desktop
+  let cellSize = window.isMobile ? 22 : 60;
+  let pixelSize = window.isMobile ? 22 : 60;
   let food = null;
 
   // Utility: Check if a cell is a barrier
@@ -147,10 +138,11 @@
     if (food && next.col === food.col && next.row === food.row) {
       snakeLen++;
       food = null;
+      spawnRandomApple();
     }
     while (snake.length > snakeLen) snake.pop();
     // Animate
-    pixels.forEach(px => { if (px) { px.style.opacity = 0; px.style.background = '#ffa04f'; } });
+    pixels.forEach(px => { if (px) { px.style.opacity = 0; px.style.background = '#e74c3c'; } });
     for (const seg of snake) {
       const idx = seg.row * cols + seg.col;
       if (pixels[idx]) pixels[idx].style.opacity = 1;
@@ -160,7 +152,21 @@
       const idx = food.row * cols + food.col;
       if (pixels[idx]) {
         pixels[idx].style.opacity = 1;
-        pixels[idx].style.background = '#ffa04f';
+        pixels[idx].style.background = '#e74c3c'; // Always red apple
+      }
+    }
+    // Always spawn an apple if none exists
+    function spawnRandomApple() {
+      if (food) return;
+      let tries = 0;
+      while (tries < 100) {
+        const col = Math.floor(Math.random() * cols);
+        const row = Math.floor(Math.random() * rows);
+        if (!isBarrier(col, row) && !snake.some(seg => seg.col === col && seg.row === row)) {
+          food = {col, row};
+          break;
+        }
+        tries++;
       }
     }
   }
@@ -181,6 +187,7 @@
     dir = {col: 1, row: 0};
     snakeLen = 8;
     food = null;
+    spawnRandomApple();
   }
 
   window.addEventListener('resize', () => {

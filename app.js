@@ -1,3 +1,24 @@
+// TEMP: Accent color test button (cycles through orange hues)
+document.addEventListener('DOMContentLoaded', function() {
+  const accentColors = [
+    { body: '#ffa04f', head: '#e68a2a', nav: '#ffa04f' },
+    { body: '#ff9800', head: '#e65100', nav: '#ff9800' },
+    { body: '#ffb347', head: '#ff8300', nav: '#ffb347' },
+    { body: '#ff7043', head: '#d84315', nav: '#ff7043' }
+  ];
+  let accentIdx = 0;
+  const accentBtn = document.getElementById('accent-test-btn');
+  if (accentBtn) {
+    accentBtn.addEventListener('click', () => {
+      accentIdx = (accentIdx + 1) % accentColors.length;
+      const c = accentColors[accentIdx];
+      document.documentElement.style.setProperty('--snake-body', c.body);
+      document.documentElement.style.setProperty('--snake-head', c.head);
+      document.documentElement.style.setProperty('--nav-active-bg', c.nav);
+      accentBtn.style.background = c.body;
+    });
+  }
+});
 // Accordion functionality for About Me section (mobile only)
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent)) {
@@ -70,10 +91,10 @@ modeToggle.addEventListener('click', () => {
     : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6" fill="#ffb300"/><g stroke="#ffb300" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>';
 });
 
-// Download button placeholder
+// Download button (update this to real download logic if needed)
 const downloadBtn = document.querySelector('.download-btn');
 downloadBtn.addEventListener('click', () => {
-  alert('Download portfolio (placeholder)');
+  // TODO: Implement real download logic
 });
 
 // Swipe support for mobile

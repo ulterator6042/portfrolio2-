@@ -26,11 +26,12 @@
   let mobileFoodInterval = null;
 
   // Apple spawn interval for mobile: 5-10 seconds
+  // (kept for mobile compatibility, but can be removed if not needed)
   let appleTimeout;
   function scheduleApple() {
     if (!window.isMobile) return;
     if (appleTimeout) clearTimeout(appleTimeout);
-    const next = 5000 + Math.random() * 5000; // 5-10 seconds
+    const next = 5000 + Math.random() * 5000;
     appleTimeout = setTimeout(() => {
       spawnRandomFoodDot();
       scheduleApple();
@@ -97,7 +98,7 @@
     if (foodDot) {
       const foodDiv = document.createElement('div');
       foodDiv.className = 'grid-snake-segment';
-      foodDiv.style.background = '#ffa04f';
+      foodDiv.style.background = '#e74c3c'; // Always red apple
       foodDiv.style.opacity = 1;
       foodDiv.style.width = `${cellSize}px`;
       foodDiv.style.height = `${cellSize}px`;
