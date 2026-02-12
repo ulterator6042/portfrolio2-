@@ -1,25 +1,32 @@
 @media (min-width: 801px) {
   .about-desktop .about-grid.about-g2 {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    max-width: 540px;
-    margin: 32px auto 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px 24px;
+    max-width: 950px;
+    margin: 90px auto 0 auto;
     width: 100%;
-    align-items: stretch;
+    align-items: start;
+    min-height: 480px;
+    box-sizing: border-box;
   }
   .about-desktop .about-col {
+    display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
   }
   .about-desktop .about-card {
-    padding: 16px 18px;
+    padding: 14px 16px;
     border-radius: 14px;
     font-size: 1em;
     margin-bottom: 0;
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
     min-width: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
   }
   .about-desktop .about-section {
     margin-bottom: 8px;
@@ -31,6 +38,13 @@
     font-size: 1.08em;
     margin: 0 0 6px 0;
   }
+  /* Prevent scroll: fit all cards in one screen */
+  #about.page {
+    overflow: hidden !important;
+    min-height: 0;
+    height: calc(100vh - 40px);
+  }
+}
 }
 @media (max-width: 800px) {
   .about-mobile .about-accordion {
