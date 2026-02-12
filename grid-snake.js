@@ -25,6 +25,18 @@
   let movingTo = null;
   let mobileFoodInterval = null;
 
+  // Apple spawn interval for mobile: 5-10 seconds
+  let appleTimeout;
+  function scheduleApple() {
+    if (!window.isMobile) return;
+    if (appleTimeout) clearTimeout(appleTimeout);
+    const next = 5000 + Math.random() * 5000; // 5-10 seconds
+    appleTimeout = setTimeout(() => {
+      spawnRandomFoodDot();
+      scheduleApple();
+    }, next);
+  }
+
   // UI avoidance
   function updateBlocked() {
     const cellSize = getCellSize();
@@ -220,6 +232,8 @@
       if (mobileFoodInterval) clearInterval(mobileFoodInterval);
       mobileFoodInterval = null;
     }
+    // In setup()
+    if (window.isMobile) scheduleApple();
   }
 
   function spawnRandomFoodDot() {

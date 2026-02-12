@@ -421,3 +421,26 @@ body.night {
 .navbar, .nav-btn, .nav-btn.active, .download-btn {
   border-radius: 999px !important;
 }
+
+@media (max-width: 800px) {
+  .mode-toggle-bar {
+    position: fixed;
+    top: auto;
+    bottom: 24px;
+    right: 24px;
+    left: auto;
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    z-index: 200;
+    background: none;
+    box-shadow: none;
+    padding: 0;
+    border-radius: 50% !important;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    /* Shift the icons down by 14px to align with menu text */
+    transform: translateY(14px);
+  }
+}
