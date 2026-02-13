@@ -10,10 +10,11 @@
   }
 }
 /* Pixel Trail Background Effect Styles */
+/* Make snake background layer sit under all UI elements for mobile */
 #pixel-trail-bg {
   position: fixed;
   top: 0; left: 0; width: 100vw; height: 100vh;
-  z-index: 0;
+  z-index: -1;
   pointer-events: none;
   overflow: hidden;
 }
@@ -24,6 +25,7 @@
   grid-template-columns: repeat(auto-fill, 60px);
   grid-template-rows: repeat(auto-fill, 60px);
   pointer-events: none;
+  z-index: -1;
 }
 .pixel-trail-pixel {
   width: 60px;
