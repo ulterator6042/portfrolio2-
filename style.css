@@ -1,3 +1,59 @@
+/* Floating accent theme selector styles (remove when done) */
+.accent-theme-floating {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 9999;
+  background: rgba(248,248,248,0.95);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px #0002;
+  padding: 10px 16px 12px 16px;
+  max-width: 320px;
+  min-width: 180px;
+  border: 1.5px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  transition: background 0.3s, border 0.3s;
+}
+.accent-theme-label {
+  font-size: 0.97em;
+  margin-bottom: 6px;
+  color: #333;
+}
+.accent-theme-btns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.accent-theme-btn {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #fff;
+  outline: 1.5px solid #bbb;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: outline 0.2s, box-shadow 0.2s;
+}
+.accent-theme-btn:focus {
+  outline: 2.5px solid #333;
+}
+body.night .accent-theme-floating {
+  background: rgba(30,30,30,0.97);
+  border: 1.5px solid #333;
+}
+body.night .accent-theme-label {
+  color: #eee;
+}
+body.night .accent-theme-btn {
+  outline: 1.5px solid #444;
+}
+/* Make About Me email link inherit text color and remove underline */
+#email-link {
+  color: inherit !important;
+  text-decoration: underline dotted;
+  cursor: pointer;
+}
 /* Portfolio Website Main Styles */
 @media (min-width: 801px) {
   .about-desktop .about-grid.about-g2 {
@@ -132,27 +188,28 @@ body {
   transition: background 0.3s, color 0.3s;
 }
 
+/* Teal accent theme */
 :root {
   --bg: #f0f0f0;
   --text: #222;
   --glass-bg: rgba(255,255,255,0.4);
   --glass-blur: 10px;
-  --nav-active-bg: #0078d7;
+  --nav-active-bg: #63b8a7;
   --nav-active-text: #fff;
-  --nav-active-shadow: 0 0 8px #0078d7;
-  --snake-body: #ffa04f;
-  --snake-head: #d76a1a;
+  --nav-active-shadow: 0 0 8px #63b8a799;
+  --snake-body: #63b8a7;
+  --snake-head: #4e9385;
 }
 
 body.night {
   --bg: #141517;
   --text: #f8f8f8;
   --glass-bg: rgba(30,30,30,0.5);
-  --nav-active-bg: #00bfff;
-  --nav-active-text: #181a1b;
-  --nav-active-shadow: 0 0 8px #00bfff;
-  --snake-body: #ff7f1a;
-  --snake-head: #c44a00;
+  --nav-active-bg: #63b8a7;
+  --nav-active-text: #f8f8f8;
+  --nav-active-shadow: 0 0 8px #63b8a799;
+  --snake-body: #63b8a7;
+  --snake-head: #4e9385;
 }
 
 .glass {
@@ -265,14 +322,35 @@ body.night {
   display: flex;
   gap: 24px;
   padding: 12px 32px;
-  z-index: 100;
+  z-index: 2000;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 
 .mode-toggle-bar {
   position: fixed;
   top: 20px;
   right: 40px;
-  z-index: 101;
+  z-index: 3000;
+  display: flex;
+  align-items: center;
+}
+.mode-toggle {
+  min-width: 44px;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s, background 0.2s;
+}
+body.night .mode-toggle {
+  color: #f8f8f8;
 }
 
 .about-grid {
@@ -402,21 +480,8 @@ body.night .download-btn {
   /* slightly lighter charcoal for contrast */
 }
 
-/* --- 2. Standardize orange snake color for both mobile and desktop --- */
-:root {
-  --snake-body: #ffa04f;
-  --snake-head: #e68a2a;
-  --nav-active-bg: #ffa04f;
-  --nav-active-text: #222;
-  --nav-active-shadow: 0 0 8px #ffa04f99;
-}
-body.night {
-  --snake-body: #ffa04f;
-  --snake-head: #e68a2a;
-  --nav-active-bg: #ffa04f;
-  --nav-active-text: #f8f8f8;
-  --nav-active-shadow: 0 0 8px #ffa04f99;
-}
+/* --- 2. Standardize green snake color for both mobile and desktop --- */
+/* (Handled above in :root and body.night) */
 
 /* --- 4. Pill shape for floating menu, nav buttons, and download button --- */
 .navbar, .nav-btn, .nav-btn.active, .download-btn {

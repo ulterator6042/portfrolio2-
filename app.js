@@ -1,24 +1,5 @@
-// TEMP: Accent color test button (cycles through orange hues)
-document.addEventListener('DOMContentLoaded', function() {
-  const accentColors = [
-    { body: '#ffa04f', head: '#e68a2a', nav: '#ffa04f' },
-    { body: '#ff9800', head: '#e65100', nav: '#ff9800' },
-    { body: '#ffb347', head: '#ff8300', nav: '#ffb347' },
-    { body: '#ff7043', head: '#d84315', nav: '#ff7043' }
-  ];
-  let accentIdx = 0;
-  const accentBtn = document.getElementById('accent-test-btn');
-  if (accentBtn) {
-    accentBtn.addEventListener('click', () => {
-      accentIdx = (accentIdx + 1) % accentColors.length;
-      const c = accentColors[accentIdx];
-      document.documentElement.style.setProperty('--snake-body', c.body);
-      document.documentElement.style.setProperty('--snake-head', c.head);
-      document.documentElement.style.setProperty('--nav-active-bg', c.nav);
-      accentBtn.style.background = c.body;
-    });
-  }
-});
+// ...existing code...
+// ...existing code...
 // Accordion functionality for About Me section (mobile only)
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent)) {
@@ -83,12 +64,19 @@ navBtns.forEach((btn, i) => {
 // Initial page and effect visibility
 showPage(currentPage);
 
+// Set correct icon on load
+function updateModeToggleIcon() {
+  // Use CSS variable for accent color
+  const accent = getComputedStyle(document.documentElement).getPropertyValue('--nav-active-bg').trim() || '#63b8a7';
+  modeToggle.innerHTML = body.classList.contains('night')
+    ? `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 0112.79 3a7.5 7.5 0 100 15A9 9 0 0121 12.79z" fill="${accent}"/></svg>`
+    : `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6" fill="${accent}"/><g stroke="${accent}" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>`;
+}
+updateModeToggleIcon();
+
 modeToggle.addEventListener('click', () => {
   body.classList.toggle('night');
-  // Update icon with SVG
-  modeToggle.innerHTML = body.classList.contains('night')
-    ? '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21 12.79A9 9 0 0112.79 3a7.5 7.5 0 100 15A9 9 0 0121 12.79z" fill="#ffb300"/></svg>'
-    : '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="6" fill="#ffb300"/><g stroke="#ffb300" stroke-width="2"><line x1="12" y1="2" x2="12" y2="6"/><line x1="12" y1="18" x2="12" y2="22"/><line x1="2" y1="12" x2="6" y2="12"/><line x1="18" y1="12" x2="22" y2="12"/><line x1="4.22" y1="4.22" x2="6.34" y2="6.34"/><line x1="17.66" y1="17.66" x2="19.78" y2="19.78"/><line x1="4.22" y1="19.78" x2="6.34" y2="17.66"/><line x1="17.66" y1="6.34" x2="19.78" y2="4.22"/></g></svg>';
+  updateModeToggleIcon();
 });
 
 // Download button (update this to real download logic if needed)
