@@ -1,3 +1,14 @@
+  /* Highlight open accordion toggle with accent color */
+  .accordion-item.active > .accordion-toggle {
+    background: var(--nav-active-bg, #63b8a7) !important;
+    color: var(--nav-active-text, #fff) !important;
+    box-shadow: 0 0 0 2px var(--nav-active-bg, #63b8a7)22;
+    transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+  }
+  background: var(--nav-active-bg, #63b8a7) !important;
+  color: var(--nav-active-text, #fff) !important;
+  box-shadow: 0 0 0 2px var(--nav-active-bg, #63b8a7)22;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 /* Floating accent theme selector styles (remove when done) */
 .accent-theme-floating {
   position: fixed;
@@ -105,10 +116,10 @@ body.night .accent-theme-btn {
 }
 @media (max-width: 800px) {
   .about-mobile .about-accordion {
-    margin: 12px 4vw 16px 4vw !important;
+    margin: 12px calc(10vw + 10px) 16px calc(10vw + 10px) !important;
     box-sizing: border-box;
     width: auto;
-    max-width: 92vw;
+    max-width: calc(80vw - 20px);
   }
 }
 /* Show/hide About layouts for mobile/desktop */
@@ -147,7 +158,10 @@ body.night .accent-theme-btn {
   transition: background 0.2s;
 }
 .accordion-toggle:hover, .accordion-toggle:focus {
-  background: rgba(0,120,215,0.08);
+  background: var(--nav-active-bg, #63b8a7);
+  color: var(--nav-active-text, #fff);
+  box-shadow: 0 0 0 2px var(--nav-active-bg, #63b8a7)22;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
 }
 .accordion-panel {
   max-height: 0;

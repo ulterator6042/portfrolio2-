@@ -96,7 +96,7 @@
   function moveSnake(ts) {
     const head = {...snake[0]};
     let next;
-    // Robust movement toward food, avoid snake body
+    // Robust movement toward food, avoid snake body, minimal zigzag
     if (food) {
       let dx = food.col - head.col;
       let dy = food.row - head.row;
@@ -105,18 +105,42 @@
       if (dx < 0) preferredDirs.push({col: -1, row: 0});
       if (dy > 0) preferredDirs.push({col: 0, row: 1});
       if (dy < 0) preferredDirs.push({col: 0, row: -1});
-      // Try preferred directions first
+      // 5% chance to turn randomly for some spread, but mostly direct
       let found = false;
-      for (const d of preferredDirs) {
-        let nc = (head.col + d.col + cols) % cols;
-        let nr = (head.row + d.row + rows) % rows;
-        if (!isBarrier(nc, nr) && !snake.some(seg => seg.col === nc && seg.row === nr)) {
-          dir = d;
-          found = true;
-          break;
+      if (Math.random() < 0.05) {
+        let allDirs = [
+          {col: 1, row: 0},
+          {col: -1, row: 0},
+          {col: 0, row: 1},
+          {col: 0, row: -1}
+        ];
+        // Shuffle directions
+        for (let i = allDirs.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [allDirs[i], allDirs[j]] = [allDirs[j], allDirs[i]];
+        }
+        for (const d of allDirs) {
+          let nc = (head.col + d.col + cols) % cols;
+          let nr = (head.row + d.row + rows) % rows;
+          if (!isBarrier(nc, nr) && !snake.some(seg => seg.col === nc && seg.row === nr)) {
+            dir = d;
+            found = true;
+            break;
+          }
         }
       }
-      // If all preferred directions are blocked, try all directions in random order
+      if (!found) {
+        for (const d of preferredDirs) {
+          let nc = (head.col + d.col + cols) % cols;
+          let nr = (head.row + d.row + rows) % rows;
+          if (!isBarrier(nc, nr) && !snake.some(seg => seg.col === nc && seg.row === nr)) {
+            dir = d;
+            found = true;
+            break;
+          }
+        }
+      }
+      // If all preferred/random directions are blocked, try all directions in random order
       if (!found) {
         let allDirs = [
           {col: 1, row: 0},

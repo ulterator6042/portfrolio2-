@@ -4,7 +4,7 @@
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent)) {
     const accordions = document.querySelectorAll('.about-accordion .accordion-item');
-    accordions.forEach(item => {
+    accordions.forEach((item, idx) => {
       const btn = item.querySelector('.accordion-toggle');
       btn.addEventListener('click', function() {
         const isActive = item.classList.contains('active');
@@ -17,8 +17,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
       });
     });
-    // Optionally, open the first accordion by default
-    if (accordions[0]) accordions[0].classList.add('active');
+    // Always open the bio section (first accordion) when About is shown
+    function openBioAccordion() {
+      if (accordions[0]) {
+        accordions.forEach(i => i.classList.remove('active'));
+        accordions[0].classList.add('active');
+      }
+    }
+    // Listen for About nav click
+    const aboutBtn = Array.from(document.querySelectorAll('.nav-btn')).find(btn => btn.dataset.section === 'about');
+    if (aboutBtn) {
+      aboutBtn.addEventListener('click', openBioAccordion);
+    }
+    // Also open on load if About is active
+    if (document.getElementById('about') && document.getElementById('about').classList.contains('active')) {
+      openBioAccordion();
+    }
   }
 });
 const navBtns = document.querySelectorAll('.nav-btn');
@@ -38,6 +52,16 @@ function showPage(index) {
     btn.classList.toggle('active', i === index);
   });
   currentPage = index;
+
+  // Always open the bio accordion when About is shown (mobile only)
+  if ((window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent)) && pages[index].id === 'about') {
+    const accordions = document.querySelectorAll('.about-accordion .accordion-item');
+    if (accordions[0]) {
+      // Open the first accordion directly, without scrollIntoView
+      accordions.forEach(i => i.classList.remove('active'));
+      accordions[0].classList.add('active');
+    }
+  }
 
   // Show/hide snake effect only on home (page 0)
   if (window.isMobile === false) {
