@@ -1,4 +1,123 @@
-// ...existing code...
+// --- Project Square Grid Expand/Collapse Logic ---
+document.addEventListener('DOMContentLoaded', function () {
+  const squares = document.querySelectorAll('.project-square-grid .project-square');
+  let expandedSquare = null;
+
+  function expandSquare(square) {
+    if (expandedSquare) return;
+    squares.forEach(sq => {
+      if (sq !== square) sq.classList.add('hide');
+    });
+    square.classList.add('expanded');
+    expandedSquare = square;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      square.querySelector('.project-square-close').focus();
+    }, 200);
+  }
+
+  function collapseSquare() {
+    if (!expandedSquare) return;
+    expandedSquare.classList.remove('expanded');
+    squares.forEach(sq => {
+      sq.classList.remove('hide');
+    });
+    expandedSquare = null;
+    document.body.style.overflow = '';
+  }
+
+  squares.forEach(square => {
+    square.addEventListener('click', function (e) {
+      if (expandedSquare) return;
+      expandSquare(square);
+    });
+    square.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && !expandedSquare) {
+        e.preventDefault();
+        expandSquare(square);
+      }
+    });
+    square.querySelector('.project-square-close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      collapseSquare();
+    });
+    square.querySelector('.project-square-expand').addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        collapseSquare();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && expandedSquare) {
+      collapseSquare();
+    }
+  });
+});
+// --- Project Menu Grid Expand/Collapse Logic ---
+document.addEventListener('DOMContentLoaded', function () {
+  const cards = document.querySelectorAll('.project-menu-grid .project-card');
+  let expandedCard = null;
+
+
+  const grid = document.querySelector('.project-menu-grid');
+
+  function expandCard(card) {
+    if (expandedCard) return;
+    // Hide all other cards with animation
+    cards.forEach(c => {
+      if (c !== card) c.classList.add('hide');
+    });
+    card.classList.add('expanded');
+    grid.classList.add('blur');
+    expandedCard = card;
+    document.body.style.overflow = 'hidden';
+    setTimeout(() => {
+      card.querySelector('.project-card-expand').focus();
+    }, 200);
+  }
+
+  function collapseCard() {
+    if (!expandedCard) return;
+    expandedCard.classList.remove('expanded');
+    // Show all cards with animation
+    cards.forEach(c => {
+      c.classList.remove('hide');
+    });
+    grid.classList.remove('blur');
+    expandedCard = null;
+    document.body.style.overflow = '';
+  }
+
+  cards.forEach(card => {
+    card.addEventListener('click', function (e) {
+      // Only expand if not already expanded
+      if (expandedCard) return;
+      expandCard(card);
+    });
+    card.addEventListener('keydown', function (e) {
+      if ((e.key === 'Enter' || e.key === ' ') && !expandedCard) {
+        e.preventDefault();
+        expandCard(card);
+      }
+    });
+    card.querySelector('.project-card-close').addEventListener('click', function (e) {
+      e.stopPropagation();
+      collapseCard();
+    });
+    card.querySelector('.project-card-expand').addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        collapseCard();
+      }
+    });
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && expandedCard) {
+      collapseCard();
+    }
+  });
+});
 // ...existing code...
 // Accordion functionality for About Me section (mobile only)
 document.addEventListener('DOMContentLoaded', function() {
