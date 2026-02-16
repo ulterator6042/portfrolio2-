@@ -29,7 +29,7 @@
   // Get all UI element bounding rects as barriers
   function updateBarriers() {
     const importantSelectors = [
-      '.navbar', '.mode-toggle-bar', '.about-card', '.gallery', '.download-btn', '.cv', '.contacts'
+      '.navbar', '.mode-toggle-bar', '.about-card', '.gallery', '.cv', '.contacts'
     ];
     barriers = [];
     for (const sel of importantSelectors) {
@@ -37,19 +37,7 @@
         barriers.push(el.getBoundingClientRect());
       });
     }
-    // Add border barriers for mobile
-    if (window.isMobile) {
-      // Top and bottom rows
-      for (let c = 0; c < cols; c++) {
-        barriers.push({left: c * cellSize, right: (c+1) * cellSize, top: 0, bottom: cellSize});
-        barriers.push({left: c * cellSize, right: (c+1) * cellSize, top: (rows-1) * cellSize, bottom: rows * cellSize});
-      }
-      // Left and right columns
-      for (let r = 0; r < rows; r++) {
-        barriers.push({left: 0, right: cellSize, top: r * cellSize, bottom: (r+1) * cellSize});
-        barriers.push({left: (cols-1) * cellSize, right: cols * cellSize, top: r * cellSize, bottom: (r+1) * cellSize});
-      }
-    }
+    // (Removed artificial border barriers for mobile)
   }
 
   function createGrid() {
