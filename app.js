@@ -1,3 +1,29 @@
+// --- Gallery Slideshow Logic ---
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.project-gallery-slideshow').forEach(function (slideshow) {
+    const slides = Array.from(slideshow.querySelectorAll('.gallery-slide'));
+    if (slides.length <= 1) return;
+    let current = 0;
+
+    function showSlide(index) {
+      slides.forEach(function (s, i) {
+        s.style.display = i === index ? '' : 'none';
+      });
+    }
+
+    slideshow.querySelector('.gallery-prev').addEventListener('click', function (e) {
+      e.stopPropagation();
+      current = (current - 1 + slides.length) % slides.length;
+      showSlide(current);
+    });
+    slideshow.querySelector('.gallery-next').addEventListener('click', function (e) {
+      e.stopPropagation();
+      current = (current + 1) % slides.length;
+      showSlide(current);
+    });
+  });
+});
+
 // --- Project Square Grid Expand/Collapse Logic ---
 document.addEventListener('DOMContentLoaded', function () {
   const squares = document.querySelectorAll('.project-square-grid .project-square');
@@ -54,71 +80,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-// --- Project Menu Grid Expand/Collapse Logic ---
-document.addEventListener('DOMContentLoaded', function () {
-  const cards = document.querySelectorAll('.project-menu-grid .project-card');
-  let expandedCard = null;
-
-
-  const grid = document.querySelector('.project-menu-grid');
-
-  function expandCard(card) {
-    if (expandedCard) return;
-    // Hide all other cards with animation
-    cards.forEach(c => {
-      if (c !== card) c.classList.add('hide');
-    });
-    card.classList.add('expanded');
-    grid.classList.add('blur');
-    expandedCard = card;
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => {
-      card.querySelector('.project-card-expand').focus();
-    }, 200);
-  }
-
-  function collapseCard() {
-    if (!expandedCard) return;
-    expandedCard.classList.remove('expanded');
-    // Show all cards with animation
-    cards.forEach(c => {
-      c.classList.remove('hide');
-    });
-    grid.classList.remove('blur');
-    expandedCard = null;
-    document.body.style.overflow = '';
-  }
-
-  cards.forEach(card => {
-    card.addEventListener('click', function (e) {
-      // Only expand if not already expanded
-      if (expandedCard) return;
-      expandCard(card);
-    });
-    card.addEventListener('keydown', function (e) {
-      if ((e.key === 'Enter' || e.key === ' ') && !expandedCard) {
-        e.preventDefault();
-        expandCard(card);
-      }
-    });
-    card.querySelector('.project-card-close').addEventListener('click', function (e) {
-      e.stopPropagation();
-      collapseCard();
-    });
-    card.querySelector('.project-card-expand').addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') {
-        collapseCard();
-      }
-    });
-  });
-
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && expandedCard) {
-      collapseCard();
-    }
-  });
-});
-// ...existing code...
 // Accordion functionality for About Me section (mobile only)
 document.addEventListener('DOMContentLoaded', function() {
   if (window.innerWidth <= 800 || /Mobi|Android/i.test(navigator.userAgent)) {
@@ -200,6 +161,7 @@ function showPage(index) {
 
 navBtns.forEach((btn, i) => {
   btn.addEventListener('click', () => {
+    if (btn.disabled) return;
     showPage(i);
   });
 });
@@ -222,11 +184,6 @@ modeToggle.addEventListener('click', () => {
   updateModeToggleIcon();
 });
 
-// Download button (update this to real download logic if needed)
-const downloadBtn = document.querySelector('.download-btn');
-downloadBtn.addEventListener('click', () => {
-  // TODO: Implement real download logic
-});
 
 // Swipe support for mobile
 let touchStartX = 0;
@@ -244,7 +201,7 @@ function handleTouchEnd() {
   if (touchEndX === 0) return;
   const diff = touchEndX - touchStartX;
   if (Math.abs(diff) > 50) {
-    if (diff < 0 && currentPage < pages.length - 1) {
+    if (diff < 0 && currentPage < navBtns.length - 1) {
       showPage(currentPage + 1);
     } else if (diff > 0 && currentPage > 0) {
       showPage(currentPage - 1);
