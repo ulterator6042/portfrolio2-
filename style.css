@@ -1577,6 +1577,12 @@ body.night .download-btn {
   margin-top: 0;
 }
 
+.home-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
 .download-btn-secondary {
   background: transparent;
   border: 1.5px solid rgba(128,128,128,0.35);
